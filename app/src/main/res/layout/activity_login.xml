@@ -6,4 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <EditText
+        android:id="@+id/phoneNumberField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="207dp"
+        android:ems="10"
+        android:hint="전화번호"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/pwdField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:ems="10"
+        android:hint="비밀번호 6자리 이상!"
+        android:inputType="numberPassword"
+        app:layout_constraintStart_toStartOf="@+id/phoneNumberField"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberField" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="19dp"
+        android:text="로그인"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ToRegister_Btn"
+        app:layout_constraintEnd_toStartOf="@+id/ToRegister_Btn"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/ToRegister_Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="13dp"
+        android:text="회원가입"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/loginBtn"
+        app:layout_constraintTop_toBottomOf="@+id/pwdField" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

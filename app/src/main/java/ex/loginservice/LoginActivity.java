@@ -1,102 +1,83 @@
 package ex.loginservice;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-import android.content.pm.PackageManager;
-import android.location.Location;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import android.Manifest;
-import android.util.Log;
-
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private FusedLocationProviderClient fusedLocationClient;
-    private LocationCallback locationCallback;
+    FirebaseAuth mFirebaseAuth; // 파이어 베이스 인증
+    DatabaseReference mDatabaseRef; // 실시간 데이터 베이스
+
+    EditText mEtPhone;
+    EditText mEtPwd;
+    Button loginBtn;
+    Button registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+
+        mEtPhone = findViewById(R.id.phoneNumberField);
+        mEtPwd = findViewById(R.id.pwdField);
+        loginBtn = findViewById(R.id.loginBtn);
+        registerBtn = findViewById(R.id.ToRegister_Btn);
+
         // 상단 바 숨김
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        // 위치 권한 허용 여부 확인
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // 권한이 허용되지 않음: 권한 요청
-            getCurrentLocation();
-        } else {
-            // 권한이 이미 허용됨: 위치 가져오기 및 업데이트 시작
-            getCurrentLocation();
-            startLocationUpdates();
-        }
-    }
-
-    private void getCurrentLocation() {
-
-        // 위치 권한 요청
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
-        }
-
-        // 장치의 현재 위치(위도, 경도) 가져오기
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        if (location != null) {
-                            double latitude = location.getLatitude();       // 위도
-                            double longitude = location.getLongitude();     // 경도
-                            // Do something with the location
-                            Log.d("LocationUpdate", "Latitude: " + latitude + ", Longitude: " + longitude);
-                        }
-                    }
-                });
-    }
-
-    private void startLocationUpdates() {
-        // LocationRequest 설정
-        LocationRequest locationRequest = LocationRequest.create();
-        locationRequest.setInterval(6000000); // 10분마다 업데이트
-        locationRequest.setFastestInterval(3000000); // 최소 5분마다 업데이트
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        // LocationCallback 정의
-        locationCallback = new LocationCallback() {
+        // 로그인 버튼
+        loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
-                for (Location location : locationResult.getLocations()) {
-                    if (location != null) {
-                        double latitude = location.getLatitude();       // 위도
-                        double longitude = location.getLongitude();     // 경도
-                        // Do something with the location
-                        Log.d("LocationUpdate", "Latitude: " + latitude + ", Longitude: " + longitude);
-                    }
-                }
+            public void onClick(View view) {
+                String phoneNumber = mEtPhone.getText().toString();
+                String password = mEtPwd.getText().toString();
+                String email = phoneNumber + "@email.com";
+
+                mFirebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if(task.isSuccessful()) {
+                                    // 로그인 성공
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(intent);
+                                    Toast.makeText(LoginActivity.this, "로그인에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                                    finish();   // 현재 액티비티 파괴
+                                }
+                                else {
+                                    Toast.makeText(LoginActivity.this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
             }
-        };
+        });
+        // 회원가입 창으로 이동
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
-

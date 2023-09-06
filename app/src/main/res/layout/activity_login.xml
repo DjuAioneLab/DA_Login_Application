@@ -1,54 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:background="#0B0B3B"
+
+
+>
 
     <EditText
-        android:id="@+id/phoneNumberField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="207dp"
-        android:ems="10"
-        android:hint="전화번호"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/phoneNumberField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borderline"
+            android:hint="전화번호"
+            android:ems="10"
+            android:layout_marginTop="207dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/lineseedkr_bd"
+            android:textColorHint="@color/white"
+            android:inputType="phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
-        android:id="@+id/pwdField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:hint="비밀번호 6자리 이상!"
-        android:inputType="numberPassword"
-        app:layout_constraintStart_toStartOf="@+id/phoneNumberField"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumberField" />
+            android:id="@+id/pwdField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:background="@drawable/borderline"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:ems="10"
+            android:textColor="@color/white"
+            android:hint="비밀번호"
+            android:fontFamily="@font/lineseedkr_bd"
+            android:inputType="numberPassword"
+            android:textColorHint="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/phoneNumberField"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumberField"/>
+
 
     <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="19dp"
-        android:text="로그인"
-        app:layout_constraintBaseline_toBaselineOf="@+id/ToRegister_Btn"
-        app:layout_constraintEnd_toStartOf="@+id/ToRegister_Btn"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="19dp"
+            android:fontFamily="@font/lineseedkr_bd"
+            android:background="@drawable/borderline"
+            android:text="로그인"
+            app:layout_constraintBaseline_toBaselineOf="@+id/ToRegister_Btn"
+            app:layout_constraintEnd_toStartOf="@+id/ToRegister_Btn"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
-        android:id="@+id/ToRegister_Btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="13dp"
-        android:text="회원가입"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/loginBtn"
-        app:layout_constraintTop_toBottomOf="@+id/pwdField" />
+            android:id="@+id/ToRegister_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="13dp"
+             android:background="@drawable/borderline"
+            android:text="회원가입"
+            android:fontFamily="@font/lineseedkr_bd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/loginBtn"
+            app:layout_constraintTop_toBottomOf="@+id/pwdField"/>
+
+    <TextView
+            android:text="Disaster Alert +"
+            android:textSize="40dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/lineseedkr_bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView3"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="46dp" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/phoneNumberField"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

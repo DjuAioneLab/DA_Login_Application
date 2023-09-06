@@ -11,6 +11,9 @@ public class UserAccount {
     private String password;    // 비밀번호
     private String name;        // 이름
 
+    private double latitude;    // 위도
+    private double longitude;   // 경도
+
     // 생성자
     public UserAccount() {}
 
@@ -29,4 +32,10 @@ public class UserAccount {
     public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }
+
+    public double getLatitude() { return latitude; }
+    public void setLatitude(double latitude) { this.latitude = latitude; }
+
+    public double getLongitude() { return longitude; }
+    public void setLongitude(double longitude) { this.longitude = longitude; }
 }

@@ -1,0 +1,16 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/circle_outout"
+        android:width="300dp"
+        android:height="300dp" />
+    <item
+        android:drawable="@drawable/circle_out"
+        android:width="250dp"
+        android:height="250dp"
+        android:gravity="center"/>
+    <item
+        android:drawable="@drawable/circle_in"
+        android:width="200dp"
+        android:height="200dp"
+        android:gravity="center"/>
+</layer-list>

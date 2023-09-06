@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Oval shape -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#2EFEF7" />
+            <stroke
+                android:width="5dp"
+                android:color="@color/white" />
+        </shape>
+    </item>
+
+    <item android:drawable="@drawable/global_warming" />
+</layer-list>
